@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Web Page</title>
+
+  <style>
+    /* CSS styles */
+    body {
+      font-family: Times, serif, Helvetica, sans-serif;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+    }
+
+    .profile img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+
+    .profile h1 {
+      font-size: 24px;
+    }
+
+    .profile p {
+      font-size: 18px;
+      color: blue;
+    }
+
+    .data {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .data div {
+      border: 1px solid black;
+      padding: 10px;
+    }
+
+    .data h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="profile">
+      <!-- Display Slack profile picture -->
+      <img src="https://ca.slack-edge.com/T05FFAA91JP-U05RBKL44V8-60e3d10fbc92-512" 
+      alt="Odey" 
+      data-testid="slackDisplayImage">
+      
+      <!-- Display Slack name -->
+      <div>
+        <h1 data-testid="slackUserName">Naa Odey Solomon</h1>
+        <p data-testid="myTrack"> Frontend</p>
+      </div>
+    </div>
+
+    <div class="data">
+      <!-- Display the current day of the week -->
+      <div>
+        <h2>Current Day of the Week</h2>
+        <p id="day" data-testid="currentDayOfTheWeek"></p>
+      </div>
+
+      <!-- Display the current UTC time -->
+      <div>
+        <h2>Current UTC Time</h2>
+        <p id="time" data-testid="currentUTCTime"></p>
+      </div>
+
+      <!-- GitHub repository -->
+      <div>
+        <h2>GitHub URL</h2>
+        <a href="https://github.com/naaodey/Odey" data-testid="githubURL"> My GitHub Repository</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JS code
+
+    // Get  elements by id
+    const dayElement = document.getElementById("day");
+    const timeElement = document.getElementById("time");
+
+    // function to update the date and time
+    function updateDateTime() {
+      
+      //  Date object
+      const date = new Date();
+
+      // Current UTC day of the week
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const day = days[date.getUTCDay()];
+
+      // Current UTC time in HH:MM:SS format
+      const hours = date.getUTCHours().toString().padStart(2, "0");
+      const minutes = date.getUTCMinutes().toString().padStart(2, "0");
+      const seconds = date.getUTCSeconds().toString().padStart(2, "0");
+      
+      const time = `${hours}:${minutes}:${seconds}`;
+
+      // Elements with the date and time
+      dayElement.textContent = day;
+      timeElement.textContent = time;
+
+    }
+
+    // Calling the function 
+    updateDateTime();
+
+    // Setting an interval to call the function every second
+    setInterval(updateDateTime, 1000);
+    
+  </script>
+</body>
+</html>
